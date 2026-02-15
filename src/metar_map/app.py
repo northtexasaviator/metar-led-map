@@ -1,13 +1,16 @@
 from .metar_fetch import get_metar
 from .translate import metar_to_state
+from .render_sim import render
 
 
 def run():
-    airport = "KDTO"
-    metar = get_metar(airport)
-    if not metar:
-        print("No METAR received")
-        return
+    airports = ["KDTO", "KDAL", "KDFW", "KGYI"]
 
-    state = metar_to_state(airport, metar)
-    print(state)
+    for a in airports:
+        metar = get_metar(a)
+        if not metar:
+            print(f"{a}: No METAR")
+            continue
+
+        state = metar_to_state(a, metar)
+        render(state)
