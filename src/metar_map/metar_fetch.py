@@ -1,22 +1,30 @@
 import urllib.request
 import json
 
-AVIATION_WEATHER_URL = (
+AVIATION_WEATHER_URL_MULTI = (
     "https://aviationweather.gov/api/data/metar"
-    "?ids={airport}&format=json&taf=false"
+    "?ids={airports}&format=json&taf=false"
 )
 
-
-def get_metar(airport: str) -> dict | None:
-    """Fetch METAR data for a single airport."""
-    url = AVIATION_WEATHER_URL.format(airport=airport.upper())
+def get_metars(airports: list[str]) -> dict[str, dict]:
+    """
+    Fetch METARs for multiple airports in one call.
+    Returns dict keyed by airport id.
+    """
+    ids = ",".join(a.upper() for a in airports)
+    url = AVIATION_WEATHER_URL_MULTI.format(airports=ids)
 
     try:
         with urllib.request.urlopen(url, timeout=10) as response:
-            data = json.loads(response.read().decode())
-            if not data:
-                return None
-            return data[0]
+            items = json.loads(response.read().decode())
+
+        out: dict[str, dict] = {}
+        for m in items:
+            # AWC commonly returns station id under "icaoId" or "stationId" depending on schema changes.
+            key = (m.get("icaoId") or m.get("stationId") or m.get("id") or "").upper()
+            if key:
+                out[key] = m
+        return out
     except Exception as e:
-        print(f"METAR fetch failed for {airport}: {e}")
-        return None
+        print(f"Batch METAR fetch failed: {e}")
+        return {}
