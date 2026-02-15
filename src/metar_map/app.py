@@ -1,17 +1,13 @@
 from .metar_fetch import get_metar
+from .translate import metar_to_state
 
 
 def run():
-    print("METAR LED Map booting...\n")
-
-    airport = "KDTO"  # Denton — easy test station
+    airport = "KDTO"
     metar = get_metar(airport)
-
     if not metar:
         print("No METAR received")
         return
 
-    print("Airport:", airport)
-    print("Flight Category:", metar.get("fltCat") or metar.get("flight_category"))
-    print("Wind:", metar.get("wdir"), "@", metar.get("wspd"))
-    print("Visibility:", metar.get("visib"))
+    state = metar_to_state(airport, metar)
+    print(state)
