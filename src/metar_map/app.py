@@ -12,6 +12,6 @@ def run():
         return
 
     print("Airport:", airport)
-    print("Flight Category:", metar.get("flight_category"))
+    print("Flight Category:", metar.get("fltCat") or metar.get("flight_category"))
     print("Wind:", metar.get("wdir"), "@", metar.get("wspd"))
     print("Visibility:", metar.get("visib"))
