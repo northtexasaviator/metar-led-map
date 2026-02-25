@@ -1,1 +1,2 @@
 # Python dependencies (Pi + Windows dev)
+astral>=3.0

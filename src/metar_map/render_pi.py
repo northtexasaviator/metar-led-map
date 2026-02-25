@@ -58,6 +58,12 @@ class PiRenderer(Renderer):
             g = int(g * scale)
             b = int(b * scale)
 
+        # Apply sunset brightness dimming
+        brightness = state.brightness_multiplier
+        r = int(r * brightness)
+        g = int(g * brightness)
+        b = int(b * brightness)
+
         self.strip.setPixelColor(idx, self.Color(r, g, b))
 
     def flush(self) -> None:

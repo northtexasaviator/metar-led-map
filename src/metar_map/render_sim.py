@@ -21,6 +21,10 @@ class SimRenderer(Renderer):
             effects.append("WIND_PULSE")
         if state.wind_gust and state.wind_gust >= 25:
             effects.append("GUST_PULSE")
+        
+        brightness_pct = int(state.brightness_multiplier * 100)
+        if state.brightness_multiplier < 1.0:
+            effects.append(f"SUNSET_DIM({brightness_pct}%)")
 
         print(
             f"LED[{idx if idx is not None else '??'}] "

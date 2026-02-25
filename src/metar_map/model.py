@@ -9,3 +9,4 @@ class LedState:
     wind_spd: int | None
     wind_gust: int | None
     lightning: bool       # True if TS in wx string (simple first pass)
+    brightness_multiplier: float = 1.0  # Dimming after sunset (0.5-1.0)
