@@ -9,3 +9,4 @@ Goals:
 - Run as a reliable always-on device
 
 Target hardware: Raspberry Pi
+# test
