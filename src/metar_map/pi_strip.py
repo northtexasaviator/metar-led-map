@@ -1,6 +1,8 @@
 try:
+    import rpi_ws281x as ws
     from rpi_ws281x import PixelStrip, Color
 except ImportError:  # Allows Windows to run without the library
+    ws = None
     PixelStrip = None
     Color = None
 
@@ -16,6 +18,9 @@ def create_strip(led_count: int):
     LED_INVERT = False
     LED_CHANNEL = 0
 
+    # Explicit color order (most WS2811/WS2812 are GRB)
+    STRIP_TYPE = ws.WS2811_STRIP_RGB
+
     strip = PixelStrip(
         led_count,
         LED_PIN,
@@ -24,6 +29,7 @@ def create_strip(led_count: int):
         LED_INVERT,
         LED_BRIGHTNESS,
         LED_CHANNEL,
+        STRIP_TYPE,
     )
     strip.begin()
     return strip, Color
