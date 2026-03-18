@@ -23,7 +23,7 @@ def create_strip(led_count: int):
     LED_CHANNEL = 0
 
     # Explicit color order (most WS2811/WS2812 are GRB)
-    STRIP_TYPE = ws.WS2811_STRIP_RGB
+    STRIP_TYPE = ws.WS2811_STRIP_GRB
 
     strip = PixelStrip(
         led_count,

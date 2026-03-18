@@ -1,5 +1,5 @@
 {
-  "led_count": 92,
+  "led_count": 93,
   "mapping": {
     "KSEA": 0,
     "KPDX": 1,
@@ -92,6 +92,7 @@
     "KJFK": 88,
     "KLGA": 89,
     "KBOS": 90,
-    "KPWM": 91
+    "KPWM": 91,
+    "KGYI": 92
   }
 }

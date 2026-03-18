@@ -91,6 +91,7 @@
     {"code": "KJFK", "lat": 40.641, "lon": -73.778},
     {"code": "KLGA", "lat": 40.777, "lon": -73.873},
     {"code": "KBOS", "lat": 42.365, "lon": -71.010},
-    {"code": "KPWM", "lat": 43.646, "lon": -70.309}
+    {"code": "KPWM", "lat": 43.646, "lon": -70.309},
+    {"code": "KGYI", "lat": 33.714, "lon": -96.674}
   ]
 }
