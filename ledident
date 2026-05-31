@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SERVICE_NAME="metar-led-map.service"
+
+cleanup() {
+	sudo systemctl start "$SERVICE_NAME" >/dev/null 2>&1 || true
+}
+
+trap cleanup EXIT
+
+sudo systemctl stop "$SERVICE_NAME"
+
+cd "$ROOT_DIR/src"
+sudo "$ROOT_DIR/.venv/bin/python" -m main ledident
